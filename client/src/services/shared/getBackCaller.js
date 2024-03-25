@@ -40,8 +40,15 @@ const getBackCaller = (module, ressource = "", version = "") => {
       }
       return response.data;
     } catch (err) {
-      const error = err.response ? err.response.data : err;
-      throw error;
+        const code = err.response?.data?.code;
+        if (code === "TOKEN_EXPIRED") {
+            window.localStorage.removeItem("user");
+            window.localStorage.removeItem("token");
+            document.location.href = "/auth/login";
+        } else {
+            const error = err.response ? err.response.data : err;
+            throw error;
+        }
     }
   };
 };
