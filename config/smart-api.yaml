@@ -1,16 +1,27 @@
+# references:
+asstantFieldsFilter: &assistantFieldsFilter
+    allowed:
+        - cin
+        - fullname
+        - birthdate
+        - hasInsurance
+        - address
+        - phone
+        - proffession
+
 users:
     schema:
         timestamps: true
         fields:
             fullname:
                 type: String
-                required: true
             username:
                 type: String
                 required: true
             role:
                 type: String
                 required: true
+                enum: "'admin', 'dr', 'assistant'"
             password:
                 type: String
                 required: true
@@ -20,66 +31,111 @@ users:
         getAll:
             user:
                 enabled: false
-comments:
-    schema:
-        timestamps: true
-        fields:
-            content:
-                type: String
-                required: true
-            author:
-                type: objectid
-                required: true
-                ref: users
-            post:
-                type: objectid
-                required: true
-                ref: posts
-    permissions:
-        default:
-            enabled: true
-            fieldsPopulate:
-                - path: author
-                  select: fullname
-                - path: post
-                  select: title
 
-posts:
+patients:
     schema:
         timestamps: true
         fields:
-            title:
+            fileNumber:
                 type: String
                 required: true
-            content:
+                auto:
+                    pattern: increment
+                    prefix: "P"
+                    length: 6
+            cin:
+                type: String
+            fullname:
                 type: String
                 required: true
-            author:
-                type: objectid
-                required: true
-                ref: users
-                fromUser: _id
+            birthdate:
+                type: Date
+            hasInsurance:
+                type: Boolean
+                default: false
+            address:
+                type: String
+            phone:
+                type: String
+            proffession:
+                type: String
+            atcdM:
+                type: String
+            atcdF:
+                type: String
+            atcdGo:
+                type: String
+            atcdCh:
+                type: String
+            atcdToxic:
+                type: String
+            weight:
+                type: Number
+            height:
+                type: Number
+            ta:
+                type: String
+            other:
+                type: String
     permissions:
         default:
             enabled: true
-            userFilter:
-                - field: isActive
-                  value: true
-                - field: role
-                  value: us
-                  operator: regex
-            fieldsPopulate:
-                - path: author
-                  select: fullname
-            ressourceFilter:
-                - field: author.fullname
-                  value: smapiuser@fullname
-                  operator: regex
-            fieldsFilter:
-                denied:
-                    - author
+        getAll:
+            assistant:
+                fieldsFilter: *assistantFieldsFilter
+        getById:
+            assistant:
+                fieldsFilter: *assistantFieldsFilter
+        create:
+            assistant:
+                fieldsFilter: *assistantFieldsFilter
         updateById:
-            default:
-                fieldsFilter:
-                    denied:
-                        - title
+            assistant:
+                fieldsFilter: *assistantFieldsFilter
+        search:
+            assistant:
+                fieldsFilter: *assistantFieldsFilter
+
+consultations:
+    schema:
+        timestamps: true
+        fields:
+            patient:
+                type: objectId
+                required: true
+            date:
+                type: Date
+                required: true
+            reason:
+                type: String
+                required: true
+            treatment:
+                type: String
+            echography:
+                type: String
+            lab:
+                type: String
+            followupDate:
+                type: Date
+            followupDesc:
+                type: String
+    permissions:
+        default:
+            enabled: true
+        getAll:
+            assistant:
+                enabled: false
+        getById:
+            assistant:
+                enabled: false
+        create:
+            assistant:
+                enabled: false
+        updateById:
+            assistant:
+                enabled: false
+        deleteById:
+            assistant:
+                enabled: false
+
+# End of config/smart-api.yaml
