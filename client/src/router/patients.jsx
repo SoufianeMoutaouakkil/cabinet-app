@@ -1,12 +1,18 @@
-import Patients from "../pages/patients/Patients";
+import Root from "../pages/patients/Root";
 import PatientsDetails from "../pages/patients/PatientsDetails";
 import PatientsNew from "../pages/patients/PatientsNew";
 import PatientsEdit from "../pages/patients/PatientsEdit";
+import PatientsList from "../pages/patients/PatientsList";
 
 export default {
     path: "/patients",
-    element: <Patients />,
+    element: <Root />,
     children: [
+        {
+            path: "",
+            index: true,
+            element: <PatientsList />,
+        },
         {
             path: ":id",
             element: <PatientsDetails />,

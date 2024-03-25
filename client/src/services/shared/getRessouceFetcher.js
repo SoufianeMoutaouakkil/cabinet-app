@@ -19,7 +19,15 @@ export const getRessouceFetcher = (resource) => {
         return await apiCaller({ id, method: "DELETE", ...opts });
     };
     const search = async (query, opts = {}) => {
-        return await apiCaller({ data: {query}, method: "POST", ...opts });
+        // parse query as stringquery
+        if (typeof query === "object") {
+            query = JSON.stringify(query);
+            query = "query=" + encodeURIComponent(query);
+        }
+        opts.query = query;
+       
+        
+        return await apiCaller({ method: "GET", ...opts });
     };
     const call = async (opts) => {
         return await apiCaller(opts);

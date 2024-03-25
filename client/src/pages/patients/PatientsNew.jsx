@@ -1,7 +1,27 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { patientsCreate } from "../../services/store/slices/patientsSlice";
+import PatientsError from "../../components/patients/common/error/PatientsError";
+import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
+import PatientsNewComponent from "../../components/patients/new/PatientsNew";
+
 const PatientsNew = () => {
+    const patient = useSelector((state) => state.patients?.create);
+    const dispatch = useDispatch();
+
+    const createPatient = (data) => {
+        dispatch(patientsCreate({data}));
+    };
+
+    useEffect(() => {
+        console.log("Home.jsx: useEffect: patients: ", patient);
+    }, [patient]);
+
     return (
         <div>
-            <h1>New Patient</h1>
+            <PatientsLoading loading={patient?.loading} />
+            <PatientsError error={patient?.error} />
+            <PatientsNewComponent createPatient={createPatient} />
         </div>
     );
 };
