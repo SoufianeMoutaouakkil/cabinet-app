@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
 import PatientsError from "../../components/patients/common/error/PatientsError";
 import PatientDetails from "../../components/patients/details/PatientDetails";
+import ConsultationsList from "../../components/consultations/list/ConsultationsList";
 
 const PatientsDetails = () => {
     const navigate = useNavigate();
@@ -50,7 +51,14 @@ const PatientsDetails = () => {
             {loading && <PatientsLoading loading={loading && !patient} />}
             {error && <PatientsError error={error} />}
             {patient && (
-                <PatientDetails user={user} patient={patient} onEdit={onEdit} />
+                <>
+                    <PatientDetails
+                        user={user}
+                        patient={patient}
+                        onEdit={onEdit}
+                    />
+                    <ConsultationsList patientId={id} />
+                </>
             )}
         </div>
     );
