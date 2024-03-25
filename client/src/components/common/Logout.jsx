@@ -10,7 +10,7 @@ const Logout = () => {
     <button
       onClick={() => {
         dispatch(logout());
-        navigate("/login");
+        navigate("/auth/login");
       }}
     >
       Logout

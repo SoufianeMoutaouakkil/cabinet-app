@@ -4,7 +4,7 @@ const PatientsSearch = ({ handleSearch }) => {
     const [q, setQ] = useState("");
 
     useEffect(() => {
-        getAll();
+        handleSearch();
     }, []);
 
     const prepareQuery = (value) => {
@@ -19,19 +19,12 @@ const PatientsSearch = ({ handleSearch }) => {
                     { field: "cin", value: query, operator: "regex" },
                 ],
             };
-            handleSearch(query);
+            handleSearch(query );
         } else {
-            getAll();
+            handleSearch();
         }
     };
 
-    const getAll = () => {
-        const queryForAll = {
-            field: "fileNumber",
-            operator: "exists",
-        };
-        handleSearch(queryForAll);
-    }
     return (
         <div>
             <input

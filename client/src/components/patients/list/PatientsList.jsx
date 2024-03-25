@@ -9,7 +9,7 @@ const ListPatients = ({ patients }) => {
                     <ul>
                         {patients.length > 0  && patients.map((item, index) => (
                             <li key={item._id ?? index}>
-                                {item.fileNumber} - {item.fullname} - {item.birthdate} 
+                                {item.fileNumber} - {item.fullname} - {item.birthdate} - {item.phone} - {item.cin} - {item.address} - {item.proffession}
                                 <a href={`/patients/${item._id}`}>Details</a>
                             </li>
                         ))}

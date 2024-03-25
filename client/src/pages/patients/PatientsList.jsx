@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-    patientsSearch,
-} from "../../services/store/slices/patientsSlice";
+import { patientsSearch } from "../../services/store/slices/patientsSlice";
 import PatientsError from "../../components/patients/common/error/PatientsError";
 import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
 import PatientsListComponent from "../../components/patients/list/PatientsList";
@@ -35,13 +33,12 @@ const PatientsList = () => {
 
     // handle error
     useEffect(() => {
-        if (searchPatients?.error)
-            setError(searchPatients?.error);
+        if (searchPatients?.error) setError(searchPatients?.error);
         else setError(null);
     }, [searchPatients]);
 
     const handleSearch = (query) => {
-        dispatch(patientsSearch(query));        
+        dispatch(patientsSearch({ query }));
     };
 
     return (

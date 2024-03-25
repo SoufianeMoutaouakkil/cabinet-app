@@ -3,7 +3,7 @@ import { useState } from "react";
 const PatientsNew = ({ createPatient }) => {
     const [fullname, setFullname] = useState("");
     const [birthdate, setBirthdate] = useState("");
-    const [proffesion, setProffesion] = useState("");
+    const [proffession, setProffession] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [cin, setCin] = useState("");
@@ -13,7 +13,7 @@ const PatientsNew = ({ createPatient }) => {
             alert("Please fill in all the fields");
             return;
         }
-        createPatient({ fullname, birthdate, proffesion, address, phone, cin });
+        createPatient({ fullname, birthdate, proffession, address, phone, cin });
     };
 
     return (
@@ -34,11 +34,11 @@ const PatientsNew = ({ createPatient }) => {
                     onChange={(e) => setBirthdate(e.target.value)}
                 />
                 <br />
-                <label htmlFor="proffesion">Proffesion:</label>
+                <label htmlFor="proffession">Proffession:</label>
                 <input
                     type="text"
-                    id="proffesion"
-                    onChange={(e) => setProffesion(e.target.value)}
+                    id="proffession"
+                    onChange={(e) => setProffession(e.target.value)}
                 />
                 <br />
                 <label htmlFor="address">Address:</label>
