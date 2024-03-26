@@ -34,7 +34,6 @@ const ConsultationsDetails = () => {
 
         if (consultationById?.error) setError(consultationById.error);
         else setError(null);
-
     }, [consultationById]);
 
     const getConsultationById = () => {

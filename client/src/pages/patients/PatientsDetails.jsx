@@ -30,7 +30,6 @@ const PatientsDetails = () => {
 
         if (patientById?.error) setError(patientById.error);
         else setError(null);
-
     }, [patientById]);
 
     const getPatientById = () => {

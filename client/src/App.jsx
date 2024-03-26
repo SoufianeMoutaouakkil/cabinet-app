@@ -4,11 +4,11 @@ import store from "./services/store";
 import router from "./router/index";
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
+    );
 };
 
 export default App;

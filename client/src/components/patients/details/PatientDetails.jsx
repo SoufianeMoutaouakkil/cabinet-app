@@ -14,7 +14,9 @@ const PatientDetails = ({ user, patient, onEdit }) => {
                     <p>Address: {patient.address}</p>
                 </>
             )}
-            <button onClick={() => onEdit(patient._id)}>Edit {patient._id}</button>
+            <button onClick={() => onEdit(patient._id)}>
+                Edit {patient._id}
+            </button>
         </div>
     );
 };

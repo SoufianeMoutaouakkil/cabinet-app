@@ -144,5 +144,4 @@ consultations:
         deleteById:
             assistant:
                 enabled: false
-
 # End of config/smart-api.yaml

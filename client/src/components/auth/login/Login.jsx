@@ -4,39 +4,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 const Login = ({ loginAction }) => {
-  const [errorText, setErrorText] = useState("");
-  const { authData, isLoading, error } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const [errorText, setErrorText] = useState("");
+    const { authData, isLoading, error } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    if (authData?.user) {
-      navigate("/");
-    }
-  }, [authData, navigate]);
+    useEffect(() => {
+        if (authData?.user) {
+            navigate("/");
+        }
+    }, [authData, navigate]);
 
-  useEffect(() => {
-    if (error) {
-      setErrorText(error);
-    }
-  }, [error]);
+    useEffect(() => {
+        if (error) {
+            setErrorText(error);
+        }
+    }, [error]);
 
-  const handleLogin = async (username, password) => {
-    try {
-      await dispatch(loginAction({ username, password }));
-      navigate("/");
-    } catch (err) {
-      setErrorText(err.message);
-    }
-  };
+    const handleLogin = async (username, password) => {
+        try {
+            await dispatch(loginAction({ username, password }));
+            navigate("/");
+        } catch (err) {
+            setErrorText(err.message);
+        }
+    };
 
-  return (
-    <LoginUI
-      handleLogin={handleLogin}
-      errorText={errorText}
-      isLoading={isLoading}
-    />
-  );
+    return (
+        <LoginUI
+            handleLogin={handleLogin}
+            errorText={errorText}
+            isLoading={isLoading}
+        />
+    );
 };
 
 export default Login;

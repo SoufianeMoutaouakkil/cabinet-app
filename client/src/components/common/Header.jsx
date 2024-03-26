@@ -9,6 +9,6 @@ const Header = () => {
             <Logout />
         </div>
     );
-}
+};
 
 export default Header;

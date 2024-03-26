@@ -7,10 +7,10 @@ import patientsReducer from "./slices/patientsSlice";
 import consultationsReducer from "./slices/consultationsSlice";
 
 export default configureStore({
-  reducer: combineReducers({
-    auth: authReducer,
-    users: usersReducer,
-    patients: patientsReducer,
-    consultations: consultationsReducer,
-  }),
+    reducer: combineReducers({
+        auth: authReducer,
+        users: usersReducer,
+        patients: patientsReducer,
+        consultations: consultationsReducer,
+    }),
 });

@@ -10,7 +10,7 @@ const PatientsNew = () => {
     const dispatch = useDispatch();
 
     const createPatient = (data) => {
-        dispatch(patientsCreate({data}));
+        dispatch(patientsCreate({ data }));
     };
 
     return (

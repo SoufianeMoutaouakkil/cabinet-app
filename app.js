@@ -5,14 +5,14 @@ const path = require("path");
 
 // server side
 const configPath = path.join(__dirname, "config");
-const smartApi = getSmartApi({ configPath, apiName: "/my-api"});
+const smartApi = getSmartApi({ configPath, apiName: "/my-api" });
 
 // client side
 const distPath = path.join(__dirname, "client/dist");
 smartApi.use(express.static(distPath));
 smartApi.get("*", (req, res) => {
     console.log("req.url: ", req.url);
-  res.sendFile(path.join(distPath, "index.html"));
+    res.sendFile(path.join(distPath, "index.html"));
 });
 
 module.exports = smartApi;

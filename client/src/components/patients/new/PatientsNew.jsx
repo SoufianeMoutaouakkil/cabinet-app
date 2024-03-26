@@ -13,7 +13,14 @@ const PatientsNew = ({ createPatient }) => {
             alert("Please fill in all the fields");
             return;
         }
-        createPatient({ fullname, birthdate, proffession, address, phone, cin });
+        createPatient({
+            fullname,
+            birthdate,
+            proffession,
+            address,
+            phone,
+            cin,
+        });
     };
 
     return (

@@ -3,19 +3,19 @@ import { logout } from "../../services/store/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 const Logout = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-  return (
-    <button
-      onClick={() => {
-        dispatch(logout());
-        navigate("/auth/login");
-      }}
-    >
-      Logout
-    </button>
-  );
+    return (
+        <button
+            onClick={() => {
+                dispatch(logout());
+                navigate("/auth/login");
+            }}
+        >
+            Logout
+        </button>
+    );
 };
 
 export default Logout;

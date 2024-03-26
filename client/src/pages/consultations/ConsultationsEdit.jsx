@@ -38,7 +38,6 @@ const ConsultationsEdit = () => {
 
         if (consultationById?.error) setError(consultationById.error);
         else setError(null);
-
     }, [consultationById]);
 
     useEffect(() => {

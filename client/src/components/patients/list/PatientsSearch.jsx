@@ -19,7 +19,7 @@ const PatientsSearch = ({ handleSearch }) => {
                     { field: "cin", value: query, operator: "regex" },
                 ],
             };
-            handleSearch(query );
+            handleSearch(query);
         } else {
             handleSearch();
         }
