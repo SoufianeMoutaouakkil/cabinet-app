@@ -1,11 +1,11 @@
 import Root from "../pages/patients/Root";
-import ConsultationsDetails from "../pages/patients/ConsultationsDetails";
-import ConsultationsNew from "../pages/patients/ConsultationsNew";
-import ConsultationsEdit from "../pages/patients/ConsultationsEdit";
-import ConsultationsList from "../pages/patients/ConsultationsList";
+import ConsultationsDetails from "../pages/consultations/ConsultationsDetails";
+import ConsultationsNew from "../pages/consultations/ConsultationsNew";
+import ConsultationsEdit from "../pages/consultations/ConsultationsEdit";
+import ConsultationsList from "../pages/consultations/ConsultationsList";
 
 export default {
-    path: "/patients",
+    path: "/consultations",
     element: <Root />,
     children: [
         {
@@ -18,7 +18,7 @@ export default {
             element: <ConsultationsDetails />,
         },
         {
-            path: "/:patientId/new",
+            path: ":patientId/new",
             element: <ConsultationsNew />,
         },
         {

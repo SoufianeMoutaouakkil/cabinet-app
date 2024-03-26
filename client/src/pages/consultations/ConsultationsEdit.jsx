@@ -1,78 +1,81 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
-import PatientsError from "../../components/patients/common/error/PatientsError";
-import PatientDetails from "../../components/patients/edit/PatientEdit";
+import ConsultationsLoading from "../../components/consultations/common/loading/ConsultationsLoading";
+import ConsultationsError from "../../components/consultations/common/error/ConsultationsError";
 
 import {
-    patientsUpdate,
-    patientsGetById,
-} from "../../services/store/slices/patientsSlice";
-import PatientEdit from "../../components/patients/edit/PatientEdit";
+    consultationsUpdate,
+    consultationsGetById,
+} from "../../services/store/slices/consultationsSlice";
+import ConsultationEdit from "../../components/consultations/edit/ConsultationEdit";
 
-const PatientsDetails = () => {
-    const navigate = useNavigate();
+const ConsultationsEdit = () => {
     const id = useParams().id;
-    const user = useSelector((state) => state.auth?.authData?.user);
-    const patientById = useSelector((state) => state.patients?.getById);
-    const patientUpdateState = useSelector((state) => state.patients?.update);
+    const consultationById = useSelector(
+        (state) => state.consultations?.getById
+    );
+    const consultationUpdateState = useSelector(
+        (state) => state.consultations?.update
+    );
     const dispatch = useDispatch();
-    const [patient, setPatient] = useState(null);
+    const [consultation, setConsultation] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         if (!id) return;
-        dispatch(patientsGetById({ id }));
+        dispatch(consultationsGetById({ id }));
     }, [dispatch, id]);
 
     useEffect(() => {
-        if (patientById?.data) setPatient(patientById.data);
-        else setPatient(null);
+        if (consultationById?.data) setConsultation(consultationById.data);
+        else setConsultation(null);
 
-        if (patientById?.loading) setLoading(true);
+        if (consultationById?.loading) setLoading(true);
         else setLoading(false);
 
-        if (patientById?.error) setError(patientById.error);
+        if (consultationById?.error) setError(consultationById.error);
         else setError(null);
 
         console.log(
-            "PatientsDetails.jsx: useEffect: patientById: ",
-            patientById
+            "ConsultationsEdit.jsx: useEffect: consultationById: ",
+            consultationById
         );
-    }, [patientById]);
+    }, [consultationById]);
 
     useEffect(() => {
-        // if (patientUpdateState?.data) {
-        //     navigate(`/patients/${id}`);
+        // if (consultationUpdateState?.data) {
+        //     navigate(`/consultations/${id}`);
         // }
 
-        if (patientUpdateState?.error) {
-            setError(patientUpdateState.error);
+        if (consultationUpdateState?.error) {
+            setError(consultationUpdateState.error);
         }
 
-        if (patientUpdateState?.loading) {
+        if (consultationUpdateState?.loading) {
             setLoading(true);
         } else {
             setLoading(false);
         }
-    }, [patientUpdateState]);
+    }, [consultationUpdateState]);
 
     const onUpdate = (data) => {
-        console.log("PatientsDetails: onUpdate: data: ", data);
-        dispatch(patientsUpdate({ id, data }));
+        console.log("ConsultationsEdit: onUpdate: data: ", data);
+        dispatch(consultationsUpdate({ id, data }));
     };
 
     return (
         <div>
-            <h1>Patient Details</h1>
-            {loading && <PatientsLoading loading={loading && !patient} />}
-            {error && <PatientsError error={error} />}
-            {patient && (
-                <PatientEdit
-                    patient={patient}
+            <h1>Consultation Details</h1>
+            {loading && (
+                <ConsultationsLoading loading={loading && !consultation} />
+            )}
+            {error && <ConsultationsError error={error} />}
+            {consultation && (
+                <ConsultationEdit
+                    consultation={consultation}
                     onUpdate={onUpdate}
                     loading={loading}
                 />
@@ -81,4 +84,4 @@ const PatientsDetails = () => {
     );
 };
 
-export default PatientsDetails;
+export default ConsultationsEdit;

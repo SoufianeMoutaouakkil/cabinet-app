@@ -12,7 +12,7 @@ const ConsultationsListUI = ({ consultations }) => {
                                 <li key={item._id ?? index}>
                                     {item.cid} - {item.date} - {item.time} -{" "}
                                     {item.patient} - {item.reason}
-                                    <a href={`/consultations/${item._id}`}>Details</a>
+                                    <a href={`/consultations/${item._id}?patientId=${item.patient}`}>Details</a>
                                 </li>
                             ))}
                     </ul>

@@ -1,67 +1,78 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { patientsGetById } from "../../services/store/slices/patientsSlice";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { consultationsGetById } from "../../services/store/slices/consultationsSlice";
 import { useEffect, useState } from "react";
-import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
-import PatientsError from "../../components/patients/common/error/PatientsError";
-import PatientDetails from "../../components/patients/details/PatientDetails";
-import ConsultationsList from "../../components/consultations/list/ConsultationsList";
+import ConsultationsLoading from "../../components/consultations/common/loading/ConsultationsLoading";
+import ConsultationsError from "../../components/consultations/common/error/ConsultationsError";
+import ConsultationDetails from "../../components/consultations/details/ConsultationDetails";
+const ConsultationsDetails = () => {
+    const [searchParams] = useSearchParams();
+    const patientId = searchParams.get("patientId");
 
-const PatientsDetails = () => {
     const navigate = useNavigate();
     const id = useParams().id;
+
     const user = useSelector((state) => state.auth?.authData?.user);
-    const patientById = useSelector((state) => state.patients?.getById);
+    const consultationById = useSelector(
+        (state) => state.consultations?.getById
+    );
     const dispatch = useDispatch();
-    const [patient, setPatient] = useState(null);
+    const [consultation, setConsultation] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        getPatientById();
+        getConsultationById();
     }, [dispatch, id]);
 
     useEffect(() => {
-        if (patientById?.data) setPatient(patientById.data);
-        else setPatient(null);
+        if (consultationById?.data) setConsultation(consultationById.data);
+        else setConsultation(null);
 
-        if (patientById?.loading) setLoading(true);
+        if (consultationById?.loading) setLoading(true);
         else setLoading(false);
 
-        if (patientById?.error) setError(patientById.error);
+        if (consultationById?.error) setError(consultationById.error);
         else setError(null);
 
         console.log(
-            "PatientsDetails.jsx: useEffect: patientById: ",
-            patientById
+            "ConsultationsDetails.jsx: useEffect: consultationById: ",
+            consultationById
         );
-    }, [patientById]);
+    }, [consultationById]);
 
-    const getPatientById = () => {
-        dispatch(patientsGetById({ id }));
+    const getConsultationById = () => {
+        dispatch(consultationsGetById({ id }));
     };
 
     const onEdit = (id) => {
-        navigate(`/patients/${id}/edit`);
+        navigate(`/consultations/${id}/edit?patientId=${patientId}`);
+    };
+
+    const onBack = () => {
+        if (patientId) navigate(`/patients/${patientId}`);
+        else navigate(`/consultations`);
     };
 
     return (
         <div>
-            <h1>Patient Details</h1>
-            {loading && <PatientsLoading loading={loading && !patient} />}
-            {error && <PatientsError error={error} />}
-            {patient && (
+            <h1>Consultation Details</h1>
+            <button onClick={onBack}>Back</button>
+            {loading && (
+                <ConsultationsLoading loading={loading && !consultation} />
+            )}
+            {error && <ConsultationsError error={error} />}
+            {consultation && (
                 <>
-                    <PatientDetails
+                    <ConsultationDetails
                         user={user}
-                        patient={patient}
+                        consultation={consultation}
                         onEdit={onEdit}
                     />
-                    <ConsultationsList patientId={id} />
                 </>
             )}
         </div>
     );
 };
 
-export default PatientsDetails;
+export default ConsultationsDetails;
