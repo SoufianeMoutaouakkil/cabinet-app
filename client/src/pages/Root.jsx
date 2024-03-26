@@ -17,11 +17,7 @@ function Root() {
 
     useEffect(() => {
         console.log("authData", authData);
-        if (
-            (!authData?.user || !authData?.token) &&
-            !currentPath.includes("/login") &&
-            !currentPath.includes("/register")
-        ) {
+        if (!authData?.user || !authData?.token) {
             setRender(<Login />);
             setIsLogged(false);
         } else {
