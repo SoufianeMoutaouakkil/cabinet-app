@@ -3,7 +3,7 @@ const ListPatients = ({ patients }) => {
         <>
             {patients && (
                 <div>
-                    <h1>Data List</h1>
+                    <h1>Patients List</h1>
                     {patients.length === 0 && <h1>No data</h1>}
 
                     <ul>

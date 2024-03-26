@@ -1,25 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { patientsCreate } from "../../services/store/slices/patientsSlice";
-import PatientsError from "../../components/patients/common/error/PatientsError";
-import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
-import PatientsNewComponent from "../../components/patients/new/PatientsNew";
+import { consultationsCreate } from "../../services/store/slices/consultationsSlice";
+import ConsultationsError from "../../components/consultations/common/error/ConsultationsError";
+import ConsultationsLoading from "../../components/consultations/common/loading/ConsultationsLoading";
+import ConsultationsNewComponent from "../../components/consultations/new/ConsultationsNew";
 
-const PatientsNew = () => {
-    const patient = useSelector((state) => state.patients?.create);
+const ConsultationsNew = () => {
+    const consultation = useSelector((state) => state.consultations?.create);
     const dispatch = useDispatch();
 
-    const createPatient = (data) => {
-        dispatch(patientsCreate({ data }));
+    const createConsultation = (data) => {
+        dispatch(consultationsCreate({ data }));
     };
 
     return (
         <div>
-            <PatientsLoading loading={patient?.loading} />
-            <PatientsError error={patient?.error} />
-            <PatientsNewComponent createPatient={createPatient} />
+            <ConsultationsLoading loading={consultation?.loading} />
+            <ConsultationsError error={consultation?.error} />
+            <ConsultationsNewComponent createConsultation={createConsultation} />
         </div>
     );
 };
 
-export default PatientsNew;
+export default ConsultationsNew;

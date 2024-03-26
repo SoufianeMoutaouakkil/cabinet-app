@@ -39,6 +39,9 @@ const PatientsDetails = () => {
     const onEdit = (id) => {
         navigate(`/patients/${id}/edit`);
     };
+    const onAddConsultation = () => {
+        navigate(`/consultations/new?patientId=${id}`);
+    };
 
     return (
         <div>
@@ -52,6 +55,7 @@ const PatientsDetails = () => {
                         patient={patient}
                         onEdit={onEdit}
                     />
+                    <button onClick={onAddConsultation}>+</button>
                     <ConsultationsList patientId={id} />
                 </>
             )}

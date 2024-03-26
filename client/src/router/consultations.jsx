@@ -18,7 +18,7 @@ export default {
             element: <ConsultationsDetails />,
         },
         {
-            path: ":patientId/new",
+            path: "new",
             element: <ConsultationsNew />,
         },
         {

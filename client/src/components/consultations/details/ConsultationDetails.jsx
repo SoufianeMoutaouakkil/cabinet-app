@@ -4,9 +4,9 @@ const ConsultationDetails = ({ consultation, onEdit }) => {
             <p>Id : {consultation.cid}</p>
             <p>Date : {consultation.date}</p>
             <p>Reason : {consultation.reason}</p>
-            <button onClick={() => onEdit(consultation._id)}>
-                Edit {consultation._id}
-            </button>
+            <p>Treatment : {consultation.treatment}</p>
+            <p>Echography : {consultation.echography}</p>
+            <button onClick={() => onEdit(consultation._id)}>Edit</button>
         </div>
     );
 };

@@ -3,7 +3,6 @@ const ConsultationsListUI = ({ consultations }) => {
         <>
             {consultations && (
                 <div>
-                    <h1>Data List</h1>
                     {consultations.length === 0 && <h1>No data</h1>}
 
                     <ul>
