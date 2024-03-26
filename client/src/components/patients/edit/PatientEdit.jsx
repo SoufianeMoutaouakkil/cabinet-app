@@ -15,7 +15,6 @@ export default function PatientEdit({ patient, onUpdate, loading }) {
     const navigate = useNavigate();
 
     const onCancel = () => {
-        // console.log("PatientEdit: onCancel: patient: ", patient);
         if (patient._id) navigate(`/patients/${patient._id}`);
         else navigate(`/patients`);
     };
@@ -45,7 +44,6 @@ export default function PatientEdit({ patient, onUpdate, loading }) {
             address,
             proffession,
         };
-        console.log("PatientEdit: onSave: data: ", data);
         onUpdate(data);
     };
 

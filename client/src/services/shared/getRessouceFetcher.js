@@ -27,8 +27,6 @@ export const getRessouceFetcher = (resource) => {
     };
     const search = async ({ query, opts = {} }) => {
         query = !query ? { field: "_id", operator: "exists" } : query;
-        console.log("search: query: ", query);
-        // parse query as stringquery
         if (typeof query === "object") {
             query = JSON.stringify(query);
             query = "query=" + encodeURIComponent(query);

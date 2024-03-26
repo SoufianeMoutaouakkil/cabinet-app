@@ -31,10 +31,6 @@ const PatientsDetails = () => {
         if (patientById?.error) setError(patientById.error);
         else setError(null);
 
-        console.log(
-            "PatientsDetails.jsx: useEffect: patientById: ",
-            patientById
-        );
     }, [patientById]);
 
     const getPatientById = () => {

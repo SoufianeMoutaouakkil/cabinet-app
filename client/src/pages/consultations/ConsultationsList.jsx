@@ -17,10 +17,8 @@ const PatientsList = () => {
     // handle data
     useEffect(() => {
         if (searchPatients?.data) {
-            console.log("searchPatients.data: ", searchPatients.data);
             setData(searchPatients.data);
         } else {
-            console.log("no data");
             setData(null);
         }
     }, [searchPatients]);

@@ -22,8 +22,6 @@ const Login = ({ loginAction }) => {
   }, [error]);
 
   const handleLogin = async (username, password) => {
-    console.log("Login.jsx: handleLogin: username: ", username);
-    console.log("Login.jsx: handleLogin: password: ", password);
     try {
       await dispatch(loginAction({ username, password }));
       navigate("/");

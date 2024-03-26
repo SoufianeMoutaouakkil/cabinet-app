@@ -39,10 +39,6 @@ const ConsultationsEdit = () => {
         if (consultationById?.error) setError(consultationById.error);
         else setError(null);
 
-        console.log(
-            "ConsultationsEdit.jsx: useEffect: consultationById: ",
-            consultationById
-        );
     }, [consultationById]);
 
     useEffect(() => {
@@ -62,7 +58,6 @@ const ConsultationsEdit = () => {
     }, [consultationUpdateState]);
 
     const onUpdate = (data) => {
-        console.log("ConsultationsEdit: onUpdate: data: ", data);
         dispatch(consultationsUpdate({ id, data }));
     };
 

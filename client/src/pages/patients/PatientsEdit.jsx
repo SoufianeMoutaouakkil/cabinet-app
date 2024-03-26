@@ -38,10 +38,6 @@ const PatientsDetails = () => {
         if (patientById?.error) setError(patientById.error);
         else setError(null);
 
-        console.log(
-            "PatientsDetails.jsx: useEffect: patientById: ",
-            patientById
-        );
     }, [patientById]);
 
     useEffect(() => {
@@ -61,7 +57,6 @@ const PatientsDetails = () => {
     }, [patientUpdateState]);
 
     const onUpdate = (data) => {
-        console.log("PatientsDetails: onUpdate: data: ", data);
         dispatch(patientsUpdate({ id, data }));
     };
 

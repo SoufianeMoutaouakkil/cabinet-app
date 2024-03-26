@@ -11,10 +11,6 @@ const Home = () => {
     dispatch(usersGetAll());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("Home.jsx: useEffect: users: ", users);
-  }, [users]);
-
   return (
     <div>
       <Header />

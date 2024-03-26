@@ -13,10 +13,6 @@ const PatientsNew = () => {
         dispatch(patientsCreate({data}));
     };
 
-    useEffect(() => {
-        console.log("Home.jsx: useEffect: patients: ", patient);
-    }, [patient]);
-
     return (
         <div>
             <PatientsLoading loading={patient?.loading} />

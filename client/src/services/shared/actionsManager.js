@@ -65,6 +65,5 @@ export const generateExportedActions = (ressourceName, ressourceActions) => {
     acc[key] = ressourceActions[action];
     return acc;
   }, {});
-  console.log({ ressourceActionsKeys, exportedActions });
   return exportedActions;
 };

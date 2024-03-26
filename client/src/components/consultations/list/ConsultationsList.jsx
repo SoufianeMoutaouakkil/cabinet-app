@@ -16,16 +16,13 @@ const ConsultationList = ({ patientId }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log("ConsultationList: useEffect: patientId: ", patientId);
         getConsultations(patientId);
     }, [dispatch, patientId]);
     // handle data
     useEffect(() => {
         if (searchConsultations?.data) {
-            console.log("searchConsultations.data: ", searchConsultations.data);
             setData(searchConsultations.data);
         } else {
-            console.log("no data");
             setData(null);
         }
     }, [searchConsultations]);
@@ -45,7 +42,6 @@ const ConsultationList = ({ patientId }) => {
     const getConsultations = (patientId) => {
         let query = null;
         if (patientId) query = { field: "patient", value: patientId };
-        console.log("ConsultationList: getConsultations: query: ", query);
         dispatch(consultationsSearch({ query }));
     };
 

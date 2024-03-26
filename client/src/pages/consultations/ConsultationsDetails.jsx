@@ -35,10 +35,6 @@ const ConsultationsDetails = () => {
         if (consultationById?.error) setError(consultationById.error);
         else setError(null);
 
-        console.log(
-            "ConsultationsDetails.jsx: useEffect: consultationById: ",
-            consultationById
-        );
     }, [consultationById]);
 
     const getConsultationById = () => {

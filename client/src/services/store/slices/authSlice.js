@@ -18,7 +18,6 @@ const getAUthData = () => {
 };
 
 export const login = createAsyncThunk("auth/login", async (data) => {
-  console.log("authSlice.js: login: data: ", data);
   return await authApi({ action: "login", method: "POST", data });
 });
 
