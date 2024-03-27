@@ -17,8 +17,9 @@ const ConsultationsListHeader = ({ onAddConsultation }) => {
                 onClick={onAddConsultation}
                 color="primary"
                 aria-label="add consultation"
+                size="small"
             >
-                <AddIcon />
+                <AddIcon /> Add Consultation
             </IconButton>
         </div>
     );

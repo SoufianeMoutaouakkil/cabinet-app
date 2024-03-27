@@ -13,8 +13,8 @@ const ConsultationEdit = ({ consultation, onUpdate }) => {
     const [treatment, setTreatment] = useState(consultation.treatment);
     const [echography, setEchography] = useState(consultation.echography);
     const [lab, setLab] = useState(consultation.lab);
-    const [followUpDate, setFollowUpDate] = useState(consultation.followUpDate);
-    const [followUpDesc, setFollowUpDesc] = useState(consultation.followUpDesc);
+    const [followupDate, setFollowupDate] = useState(consultation.followupDate);
+    const [followupDesc, setFollowupDesc] = useState(consultation.followupDesc);
     const [isChanged, setIsChanged] = useState(false);
 
     useEffect(() => {
@@ -30,16 +30,17 @@ const ConsultationEdit = ({ consultation, onUpdate }) => {
     }, [cid, date, reason, consultation]);
 
     const handleSave = () => {
-        onUpdate({
+        const data = {
             cid,
             date,
             reason,
             treatment,
             echography,
             lab,
-            followUpDate,
-            followUpDesc,
-        });
+            followupDate,
+            followupDesc,
+        };
+        onUpdate(data);
     };
 
     return (
@@ -65,10 +66,10 @@ const ConsultationEdit = ({ consultation, onUpdate }) => {
             <Divider sx={{ my: 2 }} />
             <FollowupForm
                 {...{
-                    followUpDate,
-                    setFollowUpDate,
-                    followUpDesc,
-                    setFollowUpDesc,
+                    followupDate,
+                    setFollowupDate,
+                    followupDesc,
+                    setFollowupDesc,
                 }}
             />
             <Divider sx={{ my: 2 }} />

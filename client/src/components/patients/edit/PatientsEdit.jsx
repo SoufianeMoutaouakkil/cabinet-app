@@ -5,7 +5,7 @@ import MedicalInfos from "../form/MedicalInfos";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../../common/form/BackButton";
 
-const PatientsNew = ({ patient, onUpdate, loading, role }) => {
+const PatientsEdit = ({ patient, onUpdate, loading, role }) => {
     const navigate = useNavigate();
 
     const [fullname, setFullname] = useState(patient.fullname);
@@ -119,4 +119,4 @@ const PatientsNew = ({ patient, onUpdate, loading, role }) => {
     );
 };
 
-export default PatientsNew;
+export default PatientsEdit;

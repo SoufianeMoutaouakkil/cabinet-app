@@ -14,11 +14,15 @@ const PersonalInfos = ({ patient }) => {
                     <DetailItem label="Height" value={patient.height} />
                     <DetailItem label="TA" value={patient.ta} />
                 </DetailRow>
-                <DetailItem label="ATCD-M" value={patient.atcdM} />
-                <DetailItem label="ATCD-F" value={patient.atcdF} />
-                <DetailItem label="ATCD-Go" value={patient.atcdGo} />
-                <DetailItem label="ATCD-Ch" value={patient.atcdCh} />
-                <DetailItem label="ATCD-Toxic" value={patient.atcdToxic} />
+                <DetailItem label="ATCD-M" value={patient.atcdM} br={true} />
+                <DetailItem label="ATCD-F" value={patient.atcdF} br={true} />
+                <DetailItem label="ATCD-Go" value={patient.atcdGo} br={true} />
+                <DetailItem label="ATCD-Ch" value={patient.atcdCh} br={true} />
+                <DetailItem
+                    label="ATCD-Toxic"
+                    value={patient.atcdToxic}
+                    br={true}
+                />
                 <DetailItem label="Other" value={patient.other} />
             </CardContent>
         </Card>

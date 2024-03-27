@@ -13,6 +13,7 @@ import PatientsEditComponent from "../../components/patients/edit/PatientsEdit";
 
 const PatientsEdit = () => {
     const id = useParams().id;
+    const role = useSelector((state) => state.auth?.authData?.user?.role);
     const patientById = useSelector((state) => state.patients?.getById);
     const patientUpdateState = useSelector((state) => state.patients?.update);
     const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const PatientsEdit = () => {
                     patient={patient}
                     onUpdate={onUpdate}
                     loading={loading}
+                    role={role}
                 />
             )}
         </div>

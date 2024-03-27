@@ -6,9 +6,13 @@ const PatientDetails = ({ role, patient }) => {
     return (
         <>
             <PersonalInfos patient={patient} />
-            <Divider sx={{ my: 2 }} />
-            {role === "dr" && <MedicalInfos patient={patient} />}
-            <Divider sx={{ my: 2 }} />
+            {role === "dr" && (
+                <>
+                    <Divider sx={{ my: 2 }} />
+                    <MedicalInfos patient={patient} />
+                    <Divider sx={{ my: 2 }} />
+                </>
+            )}
         </>
     );
 };

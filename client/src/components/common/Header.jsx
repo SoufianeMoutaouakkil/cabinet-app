@@ -1,18 +1,24 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import {
+    AppBar,
+    Box,
+    Button,
+    CssBaseline,
+    Divider,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    Menu,
+    MenuItem,
+    Toolbar,
+    Typography,
+} from "@mui/material";
+import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/store/slices/authSlice";
@@ -33,7 +39,7 @@ function DrawerAppBar(props) {
     const logoTitle = "Cabinet Dr. El Hajjaji";
     const user = useSelector((state) => state.auth?.authData?.user);
     const { window } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleDrawerToggle = () => {
@@ -44,7 +50,51 @@ function DrawerAppBar(props) {
         dispatch(logout());
         navigate("/auth/login");
     };
+    const [anchorEl, setAnchorEl] = useState(null);
 
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const profile = (
+        <div>
+            <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+            >
+                <AccountCircle />
+            </IconButton>
+            <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                <MenuItem onClick={handleClose}>
+                    {user?.fullname || user?.username || "User"}
+                </MenuItem>
+                <MenuItem onClick={handleLogout} sx={{ color: "red" }}>
+                    Logout
+                </MenuItem>
+            </Menu>
+        </div>
+    );
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
             <Typography variant="h6" sx={{ my: 2 }}>
@@ -114,22 +164,8 @@ function DrawerAppBar(props) {
                                 {item.label}
                             </Button>
                         ))}
-{/* to handle */}
-                        <Button sx={{ fontWeight: "800", color: "#FFF" }}>
-                            <em>
-                                Welcome,
-                                {user?.fullname
-                                    ? ` ${user?.fullname}`
-                                    : ` ${user?.username}`}
-                            </em>
-                        </Button>
-                        <Button
-                            sx={{ color: "#a11", fontWeight: "800" }}
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </Button>
                     </Box>
+                    {profile}
                 </Toolbar>
             </AppBar>
             <nav>

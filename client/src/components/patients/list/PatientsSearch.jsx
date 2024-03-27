@@ -29,11 +29,11 @@ const PatientsSearch = ({ handleSearch }) => {
     return (
         <div>
             <TextField
+                variant="standard"
                 margin="normal"
                 fullWidth
                 id="search"
                 name="search"
-                autoComplete="search"
                 label="Search"
                 placeholder="Name, File Number, CIN..."
                 value={q}

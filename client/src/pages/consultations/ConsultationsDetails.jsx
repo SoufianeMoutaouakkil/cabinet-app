@@ -15,8 +15,6 @@ const ConsultationsDetails = () => {
 
     const navigate = useNavigate();
     const id = useParams().id;
-
-    const role = useSelector((state) => state.auth?.authData?.user?.role);
     const consultationById = useSelector(
         (state) => state.consultations?.getById
     );
@@ -65,10 +63,7 @@ const ConsultationsDetails = () => {
             {error && <ConsultationsError error={error} />}
             {consultation && (
                 <>
-                    <ConsultationDetails
-                        role={role}
-                        consultation={consultation}
-                    />
+                    <ConsultationDetails consultation={consultation} />
                 </>
             )}
             <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>

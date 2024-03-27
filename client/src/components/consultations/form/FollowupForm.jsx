@@ -8,10 +8,10 @@ import FormBox from "../../common/form/FormBox";
 import DateInput from "../../common/form/DateInput";
 
 const FollowupForm = ({
-    followUpDate,
-    setFollowUpDate,
-    followUpDesc,
-    setFollowUpDesc,
+    followupDate,
+    setFollowupDate,
+    followupDesc,
+    setFollowupDesc,
 }) => {
     return (
         <Card>
@@ -21,14 +21,14 @@ const FollowupForm = ({
                 </Typography>
                 <FormBox>
                     <DateInput
-                        value={followUpDate}
-                        setter={setFollowUpDate}
+                        value={followupDate}
+                        setter={setFollowupDate}
                         label="Followup Date"
                     />
                     <TextField
                         label="Followup Description"
-                        value={followUpDesc}
-                        onChange={(e) => setFollowUpDesc(e.target.value)}
+                        value={followupDesc}
+                        onChange={(e) => setFollowupDesc(e.target.value)}
                         fullWidth
                         multiline
                         rows={4}

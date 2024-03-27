@@ -16,13 +16,13 @@ function Root() {
     const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
-        console.log("authData", authData);
         if (!authData?.user || !authData?.token) {
             setRender(<Login />);
             setIsLogged(false);
         } else {
             setIsLogged(true);
-            setRender(<Outlet />);
+            if (currentPath === "/") navigate("/patients");
+            else setRender(<Outlet />);
         }
     }, [authData, navigate, currentPath]);
 
