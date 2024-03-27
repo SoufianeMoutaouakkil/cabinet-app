@@ -1,80 +1,60 @@
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Typography, Button, Grid, Divider } from "@mui/material";
+import ConsultationForm from "../form/ConsultationForm";
+import BackButton from "../../common/form/BackButton";
 
-const ConsultationsNew = ({ createConsultation }) => {
-    const [searchParams] = useSearchParams();
-    const patientId = searchParams.get("patientId");
-
-    const navigate = useNavigate();
-
-    const [date, setDate] = useState("");
+const ConsultationEdit = ({ onCreate }) => {
+    const [cid] = useState("");
+    const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
     const [reason, setReason] = useState("");
     const [treatment, setTreatment] = useState("");
     const [echography, setEchography] = useState("");
+    const [lab, setLab] = useState("");
 
-    const handleCreateConsultation = () => {
-        if (!date || !reason) {
-            alert("Please fill in date and reason");
-            return;
-        }
-        createConsultation({
+    const handleSave = () => {
+        onCreate({
+            cid,
             date,
             reason,
             treatment,
             echography,
-            patient: patientId,
+            lab,
         });
     };
 
-    const onBack = () => {
-        if (patientId) {
-            navigate(`/patients/${patientId}`);
-        } else {
-            navigate(`/consultations`);
-        }
-    };
-
     return (
-        <div>
-            <h1>New Consultation</h1>
-            <form>
-                <label htmlFor="reason">Reason:</label>
-                <input
-                    type="text"
-                    id="reason"
-                    onChange={(e) => setReason(e.target.value)}
-                />
-                <br />
-                <label htmlFor="date">Date:</label>
-                <input
-                    type="date"
-                    id="date"
-                    onChange={(e) => setDate(e.target.value)}
-                />
-                <br />
-                <label htmlFor="treatment">Treatment:</label>
-                <input
-                    type="text"
-                    id="treatment"
-                    onChange={(e) => setTreatment(e.target.value)}
-                />
-                <br />
-                <label htmlFor="echography">Echography:</label>
-                <input
-                    type="text"
-                    id="echography"
-                    onChange={(e) => setEchography(e.target.value)}
-                />
-                <br />
-                <button type="button" onClick={handleCreateConsultation}>
-                    Create
-                </button>
-                <button type="button" onClick={onBack}>
-                    Cancel
-                </button>
-            </form>
-        </div>
+        <>
+            <Typography variant="h4" sx={{ mb: 2 }}>
+                Create Consultation
+            </Typography>
+            <ConsultationForm
+                {...{
+                    cid,
+                    date,
+                    setDate,
+                    reason,
+                    setReason,
+                    treatment,
+                    setTreatment,
+                    echography,
+                    setEchography,
+                    lab,
+                    setLab,
+                }}
+            />
+            <Divider sx={{ my: 2 }} />
+            <Grid container justifyContent="flex-end">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSave}
+                >
+                    Save
+                </Button>
+                <BackButton />
+            </Grid>
+        </>
     );
 };
 
-export default ConsultationsNew;
+export default ConsultationEdit;

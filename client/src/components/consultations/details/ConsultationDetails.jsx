@@ -1,42 +1,28 @@
-import React from "react";
-import { Card, CardContent, Typography, Grid, Button } from "@mui/material";
+import DetailRow from "../../common/details/DetailRow";
+import DetailItem from "../../common/details/DetailItem";
+import { Card, CardContent } from "@mui/material";
 
-const ConsultationDetails = ({ consultation, onEdit }) => {
+const ConsultationDetails = ({ consultation }) => {
     return (
         <Card>
             <CardContent>
-                <Grid container>
-                    <Grid item xs={6}>
-                        <Typography variant="h6">
-                            <strong>CID:</strong>
-                        </Typography>
-                        <Typography variant="h6">
-                            <strong>Date:</strong>
-                        </Typography>
-                        <Typography variant="h6">
-                            <strong>Reason:</strong>
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Typography variant="h6">{consultation.cid}</Typography>
-                        <Typography variant="h6">
-                            {consultation.date}
-                        </Typography>
-                        <Typography variant="h6">
-                            {consultation.reason}
-                        </Typography>
-                    </Grid>
-                </Grid>
+                <DetailRow>
+                    <DetailItem label="CID" value={consultation.cid} />
+                    <DetailItem
+                        label="Date"
+                        value={new Date(consultation.date).toLocaleDateString(
+                            "fr-FR"
+                        )}
+                    />
+                </DetailRow>
+                <DetailItem label="Reason" value={consultation.reason} />
+                <DetailItem label="Treatment" value={consultation.treatment} />
+                <DetailItem
+                    label="Echography"
+                    value={consultation.echography}
+                />
+                <DetailItem label="Lab tests" value={consultation.lab} />
             </CardContent>
-            <Button
-                onClick={() => onEdit(consultation._id)}
-                variant="contained"
-                color="warning"
-                sx={{ margin: "0 1rem 1rem 1rem" }}
-                size="large"
-            >
-                Edit
-            </Button>
         </Card>
     );
 };

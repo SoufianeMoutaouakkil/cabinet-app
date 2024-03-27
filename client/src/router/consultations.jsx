@@ -1,4 +1,4 @@
-import Root from "../pages/patients/Root";
+import Root from "../pages/consultations/Root";
 import ConsultationsDetails from "../pages/consultations/ConsultationsDetails";
 import ConsultationsNew from "../pages/consultations/ConsultationsNew";
 import ConsultationsEdit from "../pages/consultations/ConsultationsEdit";

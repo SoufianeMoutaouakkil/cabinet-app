@@ -58,11 +58,11 @@ const ConsultationsEdit = () => {
 
     const onUpdate = (data) => {
         dispatch(consultationsUpdate({ id, data }));
+        dispatch(consultationsGetById({ id }));
     };
 
     return (
         <div>
-            <h1>Consultation Details</h1>
             {loading && (
                 <ConsultationsLoading loading={loading && !consultation} />
             )}

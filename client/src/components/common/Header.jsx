@@ -14,7 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/store/slices/authSlice";
 
 const drawerWidth = 240;
@@ -31,6 +31,7 @@ const navItems = [
 
 function DrawerAppBar(props) {
     const logoTitle = "Cabinet Dr. El Hajjaji";
+    const user = useSelector((state) => state.auth?.authData?.user);
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const navigate = useNavigate();
@@ -105,7 +106,7 @@ function DrawerAppBar(props) {
                         {navItems.map((item) => (
                             <Button
                                 key={item.link}
-                                sx={{ color: "#fff"}}
+                                sx={{ color: "#fff" }}
                                 onClick={() => {
                                     navigate(item.link);
                                 }}
@@ -113,7 +114,19 @@ function DrawerAppBar(props) {
                                 {item.label}
                             </Button>
                         ))}
-                        <Button sx={{ color: "#a11", fontWeight: "800"  }} onClick={handleLogout}>
+{/* to handle */}
+                        <Button sx={{ fontWeight: "800", color: "#FFF" }}>
+                            <em>
+                                Welcome,
+                                {user?.fullname
+                                    ? ` ${user?.fullname}`
+                                    : ` ${user?.username}`}
+                            </em>
+                        </Button>
+                        <Button
+                            sx={{ color: "#a11", fontWeight: "800" }}
+                            onClick={handleLogout}
+                        >
                             Logout
                         </Button>
                     </Box>

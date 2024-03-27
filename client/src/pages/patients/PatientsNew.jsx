@@ -1,24 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { consultationsCreate } from "../../services/store/slices/consultationsSlice";
-import ConsultationsError from "../../components/consultations/common/error/ConsultationsError";
-import ConsultationsLoading from "../../components/consultations/common/loading/ConsultationsLoading";
-import ConsultationsNewComponent from "../../components/consultations/new/ConsultationsNew";
+import { patientsCreate } from "../../services/store/slices/patientsSlice";
+import PatientsError from "../../components/patients/common/error/PatientsError";
+import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
+import PatientsNewComponent from "../../components/patients/new/PatientsNew";
 
-const ConsultationsNew = () => {
-    const consultation = useSelector((state) => state.consultations?.create);
+const PatientsNew = () => {
+    const patient = useSelector((state) => state.patients?.create);
     const dispatch = useDispatch();
 
-    const createConsultation = (data) => {
-        dispatch(consultationsCreate({ data }));
+    const createPatient = (data) => {
+        dispatch(patientsCreate({ data }));
     };
 
     return (
         <div>
-            <ConsultationsLoading loading={consultation?.loading} />
-            <ConsultationsError error={consultation?.error} />
-            <ConsultationsNewComponent createConsultation={createConsultation} />
+            <PatientsLoading loading={patient?.loading} />
+            <PatientsError error={patient?.error} />
+            <PatientsNewComponent createPatient={createPatient} />
         </div>
     );
 };
 
-export default ConsultationsNew;
+export default PatientsNew;

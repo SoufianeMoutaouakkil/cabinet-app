@@ -68,80 +68,76 @@ const ListPatients = ({ patients }) => {
     return (
         <>
             {patients && (
-                <div>
-                    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-                        <TablePagination
-                            rowsPerPageOptions={[10, 25, 100]}
-                            component="div"
-                            count={patients.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                        <TableContainer sx={{ maxHeight: 440 }}>
-                            <Table stickyHeader aria-label="sticky table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map((column) => (
-                                            <TableCell
-                                                key={column.id}
-                                                align={column.align}
-                                                style={{
-                                                    minWidth: column.minWidth,
-                                                    fontWeight: "bold",
+                <Paper sx={{ width: "100%" }}>
+                    <TablePagination
+                        rowsPerPageOptions={[10, 25, 100]}
+                        component="div"
+                        count={patients.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                    <TableContainer sx={{ maxHeight: 440 }}>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map((column) => (
+                                        <TableCell
+                                            key={column.id}
+                                            align={column.align}
+                                            style={{
+                                                minWidth: column.minWidth,
+                                                fontWeight: "bold",
+                                            }}
+                                        >
+                                            {column.label}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {patients
+                                    .slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map((row) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                tabIndex={-1}
+                                                key={row._id}
+                                                onClick={() => {
+                                                    navigate(
+                                                        `/patients/${row._id}`
+                                                    );
                                                 }}
                                             >
-                                                {column.label}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {patients
-                                        .slice(
-                                            page * rowsPerPage,
-                                            page * rowsPerPage + rowsPerPage
-                                        )
-                                        .map((row) => {
-                                            return (
-                                                <TableRow
-                                                    hover
-                                                    role="checkbox"
-                                                    tabIndex={-1}
-                                                    key={row._id}
-                                                    onClick={() => {
-                                                        navigate(
-                                                            `/patients/${row._id}`
-                                                        );
-                                                    }}
-                                                >
-                                                    {columns.map((column) => {
-                                                        const value =
-                                                            row[column.id];
-                                                        return (
-                                                            <TableCell
-                                                                key={column.id}
-                                                                align={
-                                                                    column.align
-                                                                }
-                                                            >
-                                                                {column.format
-                                                                    ? column.format(
-                                                                          value
-                                                                      )
-                                                                    : value}
-                                                            </TableCell>
-                                                        );
-                                                    })}
-                                                </TableRow>
-                                            );
-                                        })}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
-                </div>
+                                                {columns.map((column) => {
+                                                    const value =
+                                                        row[column.id];
+                                                    return (
+                                                        <TableCell
+                                                            key={column.id}
+                                                            align={column.align}
+                                                        >
+                                                            {column.format
+                                                                ? column.format(
+                                                                      value
+                                                                  )
+                                                                : value}
+                                                        </TableCell>
+                                                    );
+                                                })}
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Paper>
             )}
         </>
     );

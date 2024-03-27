@@ -1,51 +1,64 @@
-import { Button, Divider, Typography } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import PersonalInfos from "../form/PersonalInfos";
 import MedicalInfos from "../form/MedicalInfos";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../common/form/BackButton";
 
-const PatientsNew = ({ createPatient, role }) => {
+const PatientsNew = ({ patient, onUpdate, loading, role }) => {
     const navigate = useNavigate();
-    const [fullname, setFullname] = useState("");
+
+    const [fullname, setFullname] = useState(patient.fullname);
     const [birthdate, setBirthdate] = useState(
-        new Date().toISOString().split("T")[0]
+        new Date(patient.birthdate).toISOString().split("T")[0]
     );
-    const [proffession, setProffession] = useState("");
-    const [address, setAddress] = useState("");
-    const [phone, setPhone] = useState("");
-    const [cin, setCin] = useState("");
-    const [hasInsurance, setHasInsurance] = useState(false);
+    const [proffession, setProffession] = useState(patient.proffession);
+    const [address, setAddress] = useState(patient.address);
+    const [phone, setPhone] = useState(patient.phone);
+    const [cin, setCin] = useState(patient.cin);
+    const [hasInsurance, setHasInsurance] = useState(patient.hasInsurance);
 
-    const [atcdM, setAtcdM] = useState("");
-    const [atcdGo, setAtcdGo] = useState("");
-    const [atcdF, setAtcdF] = useState("");
-    const [atcdCh, setAtcdCh] = useState("");
-    const [atcdToxic, setAtcdToxic] = useState("");
-    const [weight, setWeight] = useState("");
-    const [height, setHeight] = useState("");
-    const [ta, setTa] = useState("");
-    const [other, setOther] = useState("");
+    const [atcdM, setAtcdM] = useState(patient.atcdM);
+    const [atcdGo, setAtcdGo] = useState(patient.atcdGo);
+    const [atcdF, setAtcdF] = useState(patient.atcdF);
+    const [atcdCh, setAtcdCh] = useState(patient.atcdCh);
+    const [atcdToxic, setAtcdToxic] = useState(patient.atcdToxic);
+    const [weight, setWeight] = useState(patient.weight);
+    const [height, setHeight] = useState(patient.height);
+    const [ta, setTa] = useState(patient.ta);
+    const [other, setOther] = useState(patient.other);
 
-    const handleCreatePatient = () => {
+    const handleUpdatePatient = () => {
         if (!fullname || !birthdate) {
             alert("Please fill in all the fields");
             return;
         }
-        createPatient({
+        onUpdate({
             fullname,
             birthdate,
             proffession,
             address,
             phone,
             cin,
+            hasInsurance,
+            atcdM,
+            atcdGo,
+            atcdF,
+            atcdCh,
+            atcdToxic,
+            weight,
+            height,
+            ta,
+            other,
         });
     };
 
     return (
         <>
             <Typography variant="h4" sx={{ mb: 2 }}>
-                New Patient
+                Update Patient
             </Typography>
+            {loading && <Typography>Loading...</Typography>}
             <PersonalInfos
                 {...{
                     fullname,
@@ -91,22 +104,17 @@ const PatientsNew = ({ createPatient, role }) => {
                     />
                 </>
             )}
-            <Button
-                variant="contained"
-                onClick={handleCreatePatient}
-                sx={{ my: 2, ml: 0 }}
-                size="large"
-            >
-                Create
-            </Button>
-            <Button
-                variant="outlined"
-                onClick={() => navigate(`/patients`)}
-                sx={{ m: 2 }}
-                size="large"
-            >
-                Back
-            </Button>
+            <Grid container justifyContent="flex-end">
+                <Button
+                    variant="contained"
+                    onClick={handleUpdatePatient}
+                    sx={{ my: 2, ml: 0 }}
+                    size="large"
+                >
+                    Save
+                </Button>
+                <BackButton />
+            </Grid>
         </>
     );
 };
