@@ -41,7 +41,10 @@ const PatientsList = () => {
 
     return (
         <div>
-            <PatientsSearch handleSearch={handleSearch} />
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <h1>Patients List</h1>
+                <PatientsSearch handleSearch={handleSearch} />
+            </div>
             <PatientsLoading loading={loading && !data} />
             <PatientsError error={error} />
             <PatientsListComponent patients={data} />

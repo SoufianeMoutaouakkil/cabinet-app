@@ -1,6 +1,7 @@
 # references:
 asstantFieldsFilter: &assistantFieldsFilter
     allowed:
+        - fileNumber
         - cin
         - fullname
         - birthdate

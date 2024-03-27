@@ -8,7 +8,7 @@ const ConsultationsNew = () => {
     const consultation = useSelector((state) => state.consultations?.create);
     const dispatch = useDispatch();
 
-    const createConsultation = (data) => {
+    const onCreate = (data) => {
         dispatch(consultationsCreate({ data }));
     };
 
@@ -16,7 +16,7 @@ const ConsultationsNew = () => {
         <div>
             <ConsultationsLoading loading={consultation?.loading} />
             <ConsultationsError error={consultation?.error} />
-            <ConsultationsNewComponent createConsultation={createConsultation} />
+            <ConsultationsNewComponent onCreate={onCreate} />
         </div>
     );
 };

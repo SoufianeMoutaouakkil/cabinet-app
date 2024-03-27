@@ -1,36 +1,22 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Typography, Button, Grid, Divider } from "@mui/material";
+import ConsultationForm from "../form/ConsultationForm";
+import FollowupForm from "../form/FollowupForm";
+import BackButton from "../../common/form/BackButton";
 
-const ConsultationEdit = ({ consultation, loading, onUpdate }) => {
-    const [searchParams] = useSearchParams();
-    const patientId = searchParams.get("patientId");
-
+const ConsultationEdit = ({ consultation, onUpdate }) => {
     const [cid] = useState(consultation.cid);
-    const [date, setDate] = useState(consultation.date);
+    const [date, setDate] = useState(
+        new Date(consultation.date).toISOString().split("T")[0]
+    );
     const [reason, setReason] = useState(consultation.reason);
-
+    const [treatment, setTreatment] = useState(consultation.treatment);
+    const [echography, setEchography] = useState(consultation.echography);
+    const [lab, setLab] = useState(consultation.lab);
+    const [followupDate, setFollowupDate] = useState(consultation.followupDate);
+    const [followupDesc, setFollowupDesc] = useState(consultation.followupDesc);
     const [isChanged, setIsChanged] = useState(false);
-    const navigate = useNavigate();
 
-    const onCancel = () => {
-        if (consultation._id) {
-            let url = `/consultations/${consultation._id}`;
-            if (patientId) url += `?patientId=${patientId}`;
-            navigate(url);
-        } else {
-            if (patientId) navigate(`/patients/${patientId}`);
-            else navigate(`/consultations`);
-        }
-    };
-
-    const onSave = () => {
-        const data = {
-            cid,
-            date,
-            reason,
-        };
-        onUpdate(data);
-    };
     useEffect(() => {
         if (
             cid !== consultation.cid ||
@@ -43,46 +29,62 @@ const ConsultationEdit = ({ consultation, loading, onUpdate }) => {
         }
     }, [cid, date, reason, consultation]);
 
-    return (
-        <div>
-            <form>
-                <label htmlFor="cid">Id</label>
-                <input type="text" id="cid" value={cid} disabled={true} />
-                <br />
-                <label htmlFor="date">Date</label>
-                <input
-                    type="date"
-                    id="date"
-                    value={date}
-                    onChange={(e) => {
-                        setDate(e.target.value);
-                        setIsChanged(true);
-                    }}
-                />
-                <br />
-                <label htmlFor="reason">Reason</label>
-                <input
-                    type="text"
-                    id="reason"
-                    value={reason}
-                    onChange={(e) => {
-                        setReason(e.target.value);
-                        setIsChanged(true);
-                    }}
-                />
+    const handleSave = () => {
+        const data = {
+            cid,
+            date,
+            reason,
+            treatment,
+            echography,
+            lab,
+            followupDate,
+            followupDesc,
+        };
+        onUpdate(data);
+    };
 
-                <br />
-                <button onClick={onCancel}>Cancel</button>
-                <button
-                    type="button"
-                    disabled={loading || !isChanged}
-                    onClick={onSave}
+    return (
+        <>
+            <Typography variant="h4" sx={{ mb: 2 }}>
+                Update Consultation
+            </Typography>
+            <ConsultationForm
+                {...{
+                    cid,
+                    date,
+                    setDate,
+                    reason,
+                    setReason,
+                    treatment,
+                    setTreatment,
+                    echography,
+                    setEchography,
+                    lab,
+                    setLab,
+                }}
+            />
+            <Divider sx={{ my: 2 }} />
+            <FollowupForm
+                {...{
+                    followupDate,
+                    setFollowupDate,
+                    followupDesc,
+                    setFollowupDesc,
+                }}
+            />
+            <Divider sx={{ my: 2 }} />
+            <Grid container justifyContent="flex-end">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSave}
+                    disabled={!isChanged}
                 >
-                    {" "}
                     Save
-                </button>
-            </form>
-        </div>
+                </Button>
+                <BackButton />
+            </Grid>
+        </>
     );
 };
 

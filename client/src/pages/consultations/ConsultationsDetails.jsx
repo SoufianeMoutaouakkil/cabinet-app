@@ -5,14 +5,16 @@ import { useEffect, useState } from "react";
 import ConsultationsLoading from "../../components/consultations/common/loading/ConsultationsLoading";
 import ConsultationsError from "../../components/consultations/common/error/ConsultationsError";
 import ConsultationDetails from "../../components/consultations/details/ConsultationDetails";
+import { Grid, IconButton, Typography } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import BackButton from "../../components/common/form/BackButton";
+
 const ConsultationsDetails = () => {
     const [searchParams] = useSearchParams();
     const patientId = searchParams.get("patientId");
 
     const navigate = useNavigate();
     const id = useParams().id;
-
-    const user = useSelector((state) => state.auth?.authData?.user);
     const consultationById = useSelector(
         (state) => state.consultations?.getById
     );
@@ -40,32 +42,33 @@ const ConsultationsDetails = () => {
         dispatch(consultationsGetById({ id }));
     };
 
-    const onEdit = (id) => {
+    const onEdit = () => {
         navigate(`/consultations/${id}/edit?patientId=${patientId}`);
-    };
-
-    const onBack = () => {
-        if (patientId) navigate(`/patients/${patientId}`);
-        else navigate(`/consultations`);
     };
 
     return (
         <div>
-            <h1>Consultation Details</h1>
-            <button onClick={onBack}>Back</button>
+            <Typography
+                variant="h4"
+                sx={{ display: "flex", justifyContent: "space-between", px: 2 }}
+            >
+                Consultation Details
+                <IconButton onClick={onEdit}>
+                    <EditIcon />
+                </IconButton>
+            </Typography>
             {loading && (
                 <ConsultationsLoading loading={loading && !consultation} />
             )}
             {error && <ConsultationsError error={error} />}
             {consultation && (
                 <>
-                    <ConsultationDetails
-                        user={user}
-                        consultation={consultation}
-                        onEdit={onEdit}
-                    />
+                    <ConsultationDetails consultation={consultation} />
                 </>
             )}
+            <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>
+                <BackButton />
+            </Grid>
         </div>
     );
 };

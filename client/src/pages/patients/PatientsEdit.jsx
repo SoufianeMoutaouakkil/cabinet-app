@@ -1,21 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
 import PatientsError from "../../components/patients/common/error/PatientsError";
-import PatientDetails from "../../components/patients/edit/PatientEdit";
 
 import {
     patientsUpdate,
     patientsGetById,
 } from "../../services/store/slices/patientsSlice";
-import PatientEdit from "../../components/patients/edit/PatientEdit";
+import PatientsEditComponent from "../../components/patients/edit/PatientsEdit";
 
-const PatientsDetails = () => {
-    const navigate = useNavigate();
+const PatientsEdit = () => {
     const id = useParams().id;
-    const user = useSelector((state) => state.auth?.authData?.user);
+    const role = useSelector((state) => state.auth?.authData?.user?.role);
     const patientById = useSelector((state) => state.patients?.getById);
     const patientUpdateState = useSelector((state) => state.patients?.update);
     const dispatch = useDispatch();
@@ -40,10 +38,6 @@ const PatientsDetails = () => {
     }, [patientById]);
 
     useEffect(() => {
-        // if (patientUpdateState?.data) {
-        //     navigate(`/patients/${id}`);
-        // }
-
         if (patientUpdateState?.error) {
             setError(patientUpdateState.error);
         }
@@ -61,18 +55,18 @@ const PatientsDetails = () => {
 
     return (
         <div>
-            <h1>Patient Details</h1>
             {loading && <PatientsLoading loading={loading && !patient} />}
             {error && <PatientsError error={error} />}
             {patient && (
-                <PatientEdit
+                <PatientsEditComponent
                     patient={patient}
                     onUpdate={onUpdate}
                     loading={loading}
+                    role={role}
                 />
             )}
         </div>
     );
 };
 
-export default PatientsDetails;
+export default PatientsEdit;

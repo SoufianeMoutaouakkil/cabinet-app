@@ -1,23 +1,19 @@
-import React from "react";
+import { Divider } from "@mui/material";
+import PersonalInfos from "./PersonalInfos";
+import MedicalInfos from "./MedicalInfos";
 
-const PatientDetails = ({ user, patient, onEdit }) => {
+const PatientDetails = ({ role, patient }) => {
     return (
-        <div>
-            <p>File number: {patient.fileNumber}</p>
-            <p>Name: {patient.fullname}</p>
-            <p>CIN: {patient.cin}</p>
-            {user.role === "admin" && (
+        <>
+            <PersonalInfos patient={patient} />
+            {role === "dr" && (
                 <>
-                    <p>Age: {patient.birthdate}</p>
-                    <p>Phone: {patient.phone}</p>
-                    <p>Email: {patient.email}</p>
-                    <p>Address: {patient.address}</p>
+                    <Divider sx={{ my: 2 }} />
+                    <MedicalInfos patient={patient} />
+                    <Divider sx={{ my: 2 }} />
                 </>
             )}
-            <button onClick={() => onEdit(patient._id)}>
-                Edit {patient._id}
-            </button>
-        </div>
+        </>
     );
 };
 

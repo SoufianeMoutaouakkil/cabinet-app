@@ -1,27 +1,55 @@
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Button,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+
 const ConsultationsListUI = ({ consultations }) => {
     return (
-        <>
-            {consultations && (
-                <div>
-                    {consultations.length === 0 && <h1>No data</h1>}
-
-                    <ul>
-                        {consultations.length > 0 &&
-                            consultations.map((item, index) => (
-                                <li key={item._id ?? index}>
-                                    {item.cid} - {item.date} - {item.time} -{" "}
-                                    {item.patient} - {item.reason}
-                                    <a
-                                        href={`/consultations/${item._id}?patientId=${item.patient}`}
+        <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow
+                        sx={{ backgroundColor: "#f5f5f5", size: "large" }}
+                    >
+                        <TableCell>CID</TableCell>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Reason</TableCell>
+                        <TableCell align="right">Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {consultations &&
+                        consultations.map((item, index) => (
+                            <TableRow key={item._id ?? index}>
+                                <TableCell>{item.cid}</TableCell>
+                                <TableCell>
+                                    {item.date
+                                        ? new Date(
+                                              item.date
+                                          ).toLocaleDateString("fr-FR")
+                                        : ""}
+                                </TableCell>
+                                <TableCell>{item.reason}</TableCell>
+                                <TableCell align="right">
+                                    <Button
+                                        component={Link}
+                                        to={`/consultations/${item._id}?patientId=${item.patient}`}
                                     >
                                         Details
-                                    </a>
-                                </li>
-                            ))}
-                    </ul>
-                </div>
-            )}
-        </>
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 };
 

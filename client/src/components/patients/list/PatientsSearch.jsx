@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import TextField from "@mui/material/TextField";
 
 const PatientsSearch = ({ handleSearch }) => {
     const [q, setQ] = useState("");
@@ -27,11 +28,16 @@ const PatientsSearch = ({ handleSearch }) => {
 
     return (
         <div>
-            <input
-                type="text"
+            <TextField
+                variant="standard"
+                margin="normal"
+                fullWidth
+                id="search"
+                name="search"
+                label="Search"
+                placeholder="Name, File Number, CIN..."
                 value={q}
                 onChange={(e) => prepareQuery(e.target.value)}
-                placeholder="Search..."
             />
         </div>
     );
