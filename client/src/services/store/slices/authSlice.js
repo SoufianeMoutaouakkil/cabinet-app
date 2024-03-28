@@ -8,7 +8,7 @@ const getAUthData = () => {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     let authData = {};
-    if (authData) {
+    if (user) {
         authData.user = JSON.parse(user);
     }
     if (token) {
@@ -44,7 +44,9 @@ const authSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(login.fulfilled, (state, action) => {
-            state.authData = action.payload;
+            if (!state.authData) state.authData = {};
+            state.authData.user = action.payload?.user;
+            state.authData.token = action.payload?.token;
             localStorage.setItem("user", JSON.stringify(action.payload?.user));
             localStorage.setItem(
                 "token",
