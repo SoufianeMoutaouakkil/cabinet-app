@@ -1,6 +1,7 @@
 # references:
 asstantFieldsFilter: &assistantFieldsFilter
     allowed:
+        - _id
         - fileNumber
         - cin
         - fullname

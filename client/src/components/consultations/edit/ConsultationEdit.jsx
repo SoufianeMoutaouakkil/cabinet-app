@@ -4,7 +4,7 @@ import ConsultationForm from "../form/ConsultationForm";
 import FollowupForm from "../form/FollowupForm";
 import BackButton from "../../common/form/BackButton";
 
-const ConsultationEdit = ({ consultation, onUpdate }) => {
+const ConsultationEdit = ({ consultation, onUpdate, loading }) => {
     const [cid] = useState(consultation.cid);
     const [date, setDate] = useState(
         new Date(consultation.date).toISOString().split("T")[0]
@@ -78,7 +78,7 @@ const ConsultationEdit = ({ consultation, onUpdate }) => {
                     variant="contained"
                     color="primary"
                     onClick={handleSave}
-                    disabled={!isChanged}
+                    disabled={!isChanged || loading}
                 >
                     Save
                 </Button>

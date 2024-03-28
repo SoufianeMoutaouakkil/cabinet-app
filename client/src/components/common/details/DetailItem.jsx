@@ -14,7 +14,7 @@ const DetailItem = ({ value, label, br, type }) => {
                 alignItems={"center"}
                 minHeight={"40px"}
             >
-                <Grid item xs={3}>
+                <Grid item xs={5} md={3}>
                     <DetailLabel label={label} />
                 </Grid>
                 <Grid item>

@@ -31,10 +31,16 @@ const ConsultationForm = ({
                                 fullWidth
                             />
                         )}
-                        <DateInput value={date} setter={setDate} label="Date" />
+                        <DateInput
+                            value={date}
+                            setter={setDate}
+                            label="Date"
+                            required={true}
+                        />
                     </FormBox>
                     <TextField
                         label="Reason"
+                        required
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
                         fullWidth

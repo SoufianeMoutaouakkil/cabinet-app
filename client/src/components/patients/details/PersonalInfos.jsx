@@ -30,7 +30,7 @@ const PersonalInfos = ({ patient }) => {
                     <DetailItem label="Address" value={patient.address} />
                 </DetailRow>
                 <DetailRow>
-                    <DetailItem label="Profession" value={patient.profession} />
+                    <DetailItem label="Proffession" value={patient.proffession} />
                     <DetailItem
                         label="Has insurance"
                         value={patient.hasInsurance ? "Yes" : "No"}

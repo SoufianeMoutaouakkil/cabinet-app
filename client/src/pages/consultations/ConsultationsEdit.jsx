@@ -10,6 +10,7 @@ import {
     consultationsGetById,
 } from "../../services/store/slices/consultationsSlice";
 import ConsultationEdit from "../../components/consultations/edit/ConsultationEdit";
+import Toast from "../../components/common/actions/Toast";
 
 const ConsultationsEdit = () => {
     const id = useParams().id;
@@ -23,6 +24,7 @@ const ConsultationsEdit = () => {
     const [consultation, setConsultation] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [alert, setAlert] = useState(null);
 
     useEffect(() => {
         if (!id) return;
@@ -57,8 +59,16 @@ const ConsultationsEdit = () => {
     }, [consultationUpdateState]);
 
     const onUpdate = (data) => {
-        dispatch(consultationsUpdate({ id, data }));
-        dispatch(consultationsGetById({ id }));
+        dispatch(consultationsUpdate({ id, data, cb: afterUpdate }));
+        // dispatch(consultationsGetById({ id }));
+    };
+
+    const afterUpdate = () => {
+        setAlert(<Toast message="Consultation updated successfully" />);
+        // setConsultation(res.data);
+        setTimeout(() => {
+            setAlert(null);
+        }, 3000);
     };
 
     return (
@@ -74,6 +84,7 @@ const ConsultationsEdit = () => {
                     loading={loading}
                 />
             )}
+            {alert}
         </div>
     );
 };

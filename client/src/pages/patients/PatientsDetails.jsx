@@ -1,15 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { patientsGetById } from "../../services/store/slices/patientsSlice";
+import {
+    patientsGetById,
+    patientsRemove,
+} from "../../services/store/slices/patientsSlice";
 import { useEffect, useState } from "react";
 import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
 import PatientsError from "../../components/patients/common/error/PatientsError";
 import PatientDetails from "../../components/patients/details/PatientDetails";
 import ConsultationsList from "../../components/consultations/list/ConsultationsList";
 import ConsultationsListHeader from "../../components/consultations/list/ConsultationsListHeader";
-import { Grid, IconButton, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import BackButton from "../../components/common/form/BackButton";
+import Toast from "../../components/common/actions/Toast";
+import ConfirmDialog from "../../components/common/actions/Confirm";
 
 const PatientsDetails = () => {
     const navigate = useNavigate();
@@ -20,6 +25,9 @@ const PatientsDetails = () => {
     const [patient, setPatient] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [isDeleted, setIsDeleted] = useState(false);
+    const [alert, setAlert] = useState(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         getPatientById();
@@ -47,6 +55,21 @@ const PatientsDetails = () => {
         navigate(`/consultations/new?patientId=${id}`);
     };
 
+    const handleDelete = () => {
+        dispatch(patientsRemove({ id, cb: afterDelete }));
+    };
+
+    const afterDelete = () => {
+        setIsDeleted(true);
+        setAlert(
+            <Toast message="Patient deleted successfully" type="warning" />
+        );
+        setTimeout(() => {
+            setAlert(null);
+            navigate("/patients");
+        }, 3000);
+    };
+
     return (
         <div>
             <Typography
@@ -64,6 +87,16 @@ const PatientsDetails = () => {
                 <>
                     <PatientDetails role={role} patient={patient} />
                     <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={() => setOpen(true)}
+                            sx={{ my: 2, ml: 0 }}
+                            size="large"
+                            disabled={loading || isDeleted}
+                        >
+                            Delete
+                        </Button>
                         <BackButton />
                     </Grid>
                     {role === "dr" && (
@@ -76,6 +109,12 @@ const PatientsDetails = () => {
                     )}
                 </>
             )}
+            {alert}
+            <ConfirmDialog
+                open={open}
+                setOpen={setOpen}
+                onConfirm={handleDelete}
+            />
         </div>
     );
 };

@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Typography, Button, Grid, Divider } from "@mui/material";
 import ConsultationForm from "../form/ConsultationForm";
 import BackButton from "../../common/form/BackButton";
+import { useSearchParams } from "react-router-dom";
 
-const ConsultationEdit = ({ onCreate }) => {
+const ConsultationEdit = ({ onCreate, loading, isCreated }) => {
     const [cid] = useState("");
+    const [searchParams] = useSearchParams();
+    const patientId = searchParams.get("patientId");
     const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
     const [reason, setReason] = useState("");
     const [treatment, setTreatment] = useState("");
@@ -13,6 +16,7 @@ const ConsultationEdit = ({ onCreate }) => {
 
     const handleSave = () => {
         onCreate({
+            patient: patientId,
             cid,
             date,
             reason,
@@ -48,6 +52,7 @@ const ConsultationEdit = ({ onCreate }) => {
                     variant="contained"
                     color="primary"
                     onClick={handleSave}
+                    disabled={!date || !reason || loading || isCreated}
                 >
                     Save
                 </Button>
