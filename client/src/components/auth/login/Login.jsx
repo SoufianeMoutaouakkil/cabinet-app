@@ -1,19 +1,13 @@
 import LoginUI from "./LoginUI";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 
 const Login = ({ loginAction }) => {
     const [errorText, setErrorText] = useState("");
-    const { authData, isLoading, error } = useSelector((state) => state.auth);
+    const { isLoading, error } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (authData?.user) {
-            navigate("/");
-        }
-    }, [authData, navigate]);
+
 
     useEffect(() => {
         if (error) {
@@ -24,7 +18,6 @@ const Login = ({ loginAction }) => {
     const handleLogin = async (username, password) => {
         try {
             await dispatch(loginAction({ username, password }));
-            navigate("/");
         } catch (err) {
             setErrorText(err.message);
         }

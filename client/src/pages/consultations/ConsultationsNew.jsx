@@ -22,7 +22,10 @@ const ConsultationsNew = () => {
         setIsCreated(true);
         setAlert(<Toast message="Consultation created successfully" />);
         setTimeout(() => {
-            if (res.data._id) navigate(`/consultations/${res.data._id}`);
+            if (res.data._id)
+                navigate(
+                    `/consultations/${res.data._id}?patientId=${res.data.patient}`
+                );
             else navigate(`/consultations`);
             setAlert(null);
         }, 3000);

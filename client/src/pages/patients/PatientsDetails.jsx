@@ -97,7 +97,7 @@ const PatientsDetails = () => {
                         >
                             Delete
                         </Button>
-                        <BackButton />
+                        <BackButton url="/patients" />
                     </Grid>
                     {role === "dr" && (
                         <>

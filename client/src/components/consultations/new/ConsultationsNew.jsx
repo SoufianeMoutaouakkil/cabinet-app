@@ -56,7 +56,7 @@ const ConsultationEdit = ({ onCreate, loading, isCreated }) => {
                 >
                     Save
                 </Button>
-                <BackButton />
+                <BackButton url={`/patients/${patientId}`} />
             </Grid>
         </>
     );

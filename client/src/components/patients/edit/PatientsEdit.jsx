@@ -112,7 +112,7 @@ const PatientsEdit = ({ patient, onUpdate, loading, role }) => {
                 >
                     Save
                 </Button>
-                <BackButton />
+                <BackButton url={`/patients/${patient._id}`} />
             </Grid>
         </>
     );

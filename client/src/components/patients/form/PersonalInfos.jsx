@@ -56,6 +56,7 @@ const PersonalInfos = ({
                             value={fullname}
                             onChange={(e) => setFullname(e.target.value)}
                             fullWidth
+                            required
                         />
                         <TextField
                             label="CIN"

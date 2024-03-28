@@ -101,7 +101,7 @@ const ConsultationsDetails = () => {
                     <DeleteIcon />
                     Delete
                 </Button>
-                <BackButton />
+                <BackButton url={`/patients/${patientId}`} />
             </Grid>
             {alert}
             <ConfirmDialog

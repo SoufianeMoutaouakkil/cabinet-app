@@ -82,7 +82,7 @@ const ConsultationEdit = ({ consultation, onUpdate, loading }) => {
                 >
                     Save
                 </Button>
-                <BackButton />
+                <BackButton url={`/consultations/${consultation._id}`} />
             </Grid>
         </>
     );

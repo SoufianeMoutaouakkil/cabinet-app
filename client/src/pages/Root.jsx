@@ -21,10 +21,11 @@ function Root() {
             setIsLogged(false);
         } else {
             setIsLogged(true);
+            console.log("currentPath test : ", currentPath);
             if (currentPath === "/") navigate("/patients");
-            else setRender(<Outlet />);
+            setRender(<Outlet />);
         }
-    }, [authData, navigate, currentPath]);
+    }, [authData, navigate]);
 
     return (
         <ThemeProvider theme={defaultTheme}>
