@@ -2,11 +2,9 @@ import { Button, Divider, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import PersonalInfos from "../form/PersonalInfos";
 import MedicalInfos from "../form/MedicalInfos";
-import { useNavigate } from "react-router-dom";
 import BackButton from "../../common/form/BackButton";
 
 const PatientsEdit = ({ patient, onUpdate, loading, role }) => {
-    const navigate = useNavigate();
 
     const [fullname, setFullname] = useState(patient.fullname);
     const [birthdate, setBirthdate] = useState(
@@ -110,6 +108,7 @@ const PatientsEdit = ({ patient, onUpdate, loading, role }) => {
                     onClick={handleUpdatePatient}
                     sx={{ my: 2, ml: 0 }}
                     size="large"
+                    disabled={loading}
                 >
                     Save
                 </Button>

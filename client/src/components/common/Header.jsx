@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import EditIcon from "@mui/icons-material/AccountCircle";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,13 +69,13 @@ function DrawerAppBar(props) {
                 onClick={handleMenu}
                 color="inherit"
             >
-                <AccountCircle />
+                <EditIcon />
             </IconButton>
             <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                    vertical: "top",
+                    vertical: "bottom",
                     horizontal: "right",
                 }}
                 keepMounted
@@ -86,9 +86,9 @@ function DrawerAppBar(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>
+                <Typography variant="h6" sx={{ textAlign: "center", mx: 2 }}>
                     {user?.fullname || user?.username || "User"}
-                </MenuItem>
+                </Typography>
                 <MenuItem onClick={handleLogout} sx={{ color: "red" }}>
                     Logout
                 </MenuItem>

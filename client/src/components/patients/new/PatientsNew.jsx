@@ -1,10 +1,10 @@
-import { Button, Divider, Typography } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import PersonalInfos from "../form/PersonalInfos";
 import MedicalInfos from "../form/MedicalInfos";
 import { useNavigate } from "react-router-dom";
 
-const PatientsNew = ({ createPatient, role }) => {
+const PatientsNew = ({ createPatient, role, loading, isCreated }) => {
     const navigate = useNavigate();
     const [fullname, setFullname] = useState("");
     const [birthdate, setBirthdate] = useState(
@@ -91,22 +91,25 @@ const PatientsNew = ({ createPatient, role }) => {
                     />
                 </>
             )}
-            <Button
-                variant="contained"
-                onClick={handleCreatePatient}
-                sx={{ my: 2, ml: 0 }}
-                size="large"
-            >
-                Create
-            </Button>
-            <Button
-                variant="outlined"
-                onClick={() => navigate(`/patients`)}
-                sx={{ m: 2 }}
-                size="large"
-            >
-                Back
-            </Button>
+            <Grid container justifyContent="flex-end">
+                <Button
+                    variant="contained"
+                    onClick={handleCreatePatient}
+                    sx={{ my: 2, ml: 0 }}
+                    size="large"
+                    disabled={loading || isCreated}
+                >
+                    Create
+                </Button>
+                <Button
+                    variant="outlined"
+                    onClick={() => navigate(`/patients`)}
+                    sx={{ m: 2 }}
+                    size="large"
+                >
+                    Back
+                </Button>
+            </Grid>
         </>
     );
 };

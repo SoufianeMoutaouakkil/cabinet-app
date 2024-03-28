@@ -10,6 +10,7 @@ import {
     patientsGetById,
 } from "../../services/store/slices/patientsSlice";
 import PatientsEditComponent from "../../components/patients/edit/PatientsEdit";
+import Toast from "../../components/common/actions/Toast";
 
 const PatientsEdit = () => {
     const id = useParams().id;
@@ -20,6 +21,7 @@ const PatientsEdit = () => {
     const [patient, setPatient] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [alert, setAlert] = useState(null);
 
     useEffect(() => {
         if (!id) return;
@@ -38,6 +40,7 @@ const PatientsEdit = () => {
     }, [patientById]);
 
     useEffect(() => {
+        console.log("patientUpdateState test : ", patientUpdateState);
         if (patientUpdateState?.error) {
             setError(patientUpdateState.error);
         }
@@ -50,7 +53,14 @@ const PatientsEdit = () => {
     }, [patientUpdateState]);
 
     const onUpdate = (data) => {
-        dispatch(patientsUpdate({ id, data }));
+        dispatch(patientsUpdate({ id, data, cb: afterUpdate }));
+    };
+
+    const afterUpdate = () => {
+        setAlert(<Toast message="Patient updated successfully" />);
+        setTimeout(() => {
+            setAlert(null);
+        }, 3000);
     };
 
     return (
@@ -65,6 +75,7 @@ const PatientsEdit = () => {
                     role={role}
                 />
             )}
+            {alert}
         </div>
     );
 };
