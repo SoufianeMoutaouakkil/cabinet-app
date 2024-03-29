@@ -6,8 +6,9 @@ import TextField from "@mui/material/TextField";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Toast from "../../common/dialog/Toast";
 
-const LoginUI = ({ handleLogin, errorText }) => {
+const LoginUI = ({ handleLogin, errorText, isLoading }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -67,12 +68,13 @@ const LoginUI = ({ handleLogin, errorText }) => {
                         onClick={() => {
                             handleLogin(username, password);
                         }}
+                        disabled={!username || !password || isLoading}
                     >
                         login
                     </Button>
                 </Box>
             </Box>
-            {errorText && <p>{errorText}</p>}
+            {errorText && <Toast type="error" message={errorText} />}
         </div>
     );
 };

@@ -13,8 +13,8 @@ import ConsultationsListHeader from "../../components/consultations/list/Consult
 import { Button, Grid, IconButton, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import BackButton from "../../components/common/form/BackButton";
-import Toast from "../../components/common/actions/Toast";
-import ConfirmDialog from "../../components/common/actions/Confirm";
+import Toast from "../../components/common/dialog/Toast";
+import ConfirmDialog from "../../components/common/dialog/Confirm";
 
 const PatientsDetails = () => {
     const navigate = useNavigate();

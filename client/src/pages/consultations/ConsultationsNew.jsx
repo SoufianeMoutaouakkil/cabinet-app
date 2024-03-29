@@ -5,7 +5,7 @@ import ConsultationsLoading from "../../components/consultations/common/loading/
 import ConsultationsNewComponent from "../../components/consultations/new/ConsultationsNew";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import Toast from "../../components/common/actions/Toast";
+import Toast from "../../components/common/dialog/Toast";
 
 const ConsultationsNew = () => {
     const consultation = useSelector((state) => state.consultations?.create);

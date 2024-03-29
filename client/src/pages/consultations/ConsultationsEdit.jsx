@@ -10,7 +10,7 @@ import {
     consultationsGetById,
 } from "../../services/store/slices/consultationsSlice";
 import ConsultationEdit from "../../components/consultations/edit/ConsultationEdit";
-import Toast from "../../components/common/actions/Toast";
+import Toast from "../../components/common/dialog/Toast";
 
 const ConsultationsEdit = () => {
     const id = useParams().id;

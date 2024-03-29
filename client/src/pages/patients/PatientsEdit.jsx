@@ -10,7 +10,7 @@ import {
     patientsGetById,
 } from "../../services/store/slices/patientsSlice";
 import PatientsEditComponent from "../../components/patients/edit/PatientsEdit";
-import Toast from "../../components/common/actions/Toast";
+import Toast from "../../components/common/dialog/Toast";
 
 const PatientsEdit = () => {
     const id = useParams().id;

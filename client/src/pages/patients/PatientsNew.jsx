@@ -3,7 +3,7 @@ import { patientsCreate } from "../../services/store/slices/patientsSlice";
 import PatientsError from "../../components/patients/common/error/PatientsError";
 import PatientsLoading from "../../components/patients/common/loading/PatientsLoading";
 import PatientsNewComponent from "../../components/patients/new/PatientsNew";
-import Toast from "../../components/common/actions/Toast";
+import Toast from "../../components/common/dialog/Toast";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 

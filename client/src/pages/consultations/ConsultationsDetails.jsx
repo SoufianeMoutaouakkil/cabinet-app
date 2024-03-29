@@ -12,8 +12,8 @@ import { Grid, IconButton, Typography, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import BackButton from "../../components/common/form/BackButton";
-import Toast from "../../components/common/actions/Toast";
-import ConfirmDialog from "../../components/common/actions/Confirm";
+import Toast from "../../components/common/dialog/Toast";
+import ConfirmDialog from "../../components/common/dialog/Confirm";
 
 const ConsultationsDetails = () => {
     const [searchParams] = useSearchParams();

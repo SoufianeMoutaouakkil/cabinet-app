@@ -1,15 +1,5 @@
-const PatientsError = ({ error }) => {
-    return (
-        <>
-            {error && (
-                <div>
-                    <h1>Error</h1>
-                    <p>Something went wrong.</p>
-                    <p>{error?.message ?? error}</p>
-                </div>
-            )}
-        </>
-    );
-};
+import Toast from "../../../common/dialog/Toast";
 
-export default PatientsError;
+export default function ConsultationsError({ error }) {
+    return <>{error && <Toast message={error} type="error" />}</>;
+}
