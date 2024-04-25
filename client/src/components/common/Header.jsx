@@ -36,7 +36,7 @@ const navItems = [
 ];
 
 function DrawerAppBar(props) {
-    const logoTitle = "Cabinet Dr. El Hajjaji";
+    const logoTitle = "My Doctor App";
     const user = useSelector((state) => state.auth?.authData?.user);
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);

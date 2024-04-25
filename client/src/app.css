@@ -1,0 +1,14 @@
+body {
+    position: relative;
+    background: url("/assets/bg-login.png") no-repeat center center fixed;
+    padding: 0;
+    border: 1rem solid transparent;
+    backdrop-filter: blur(5px);
+    height: 100vh;
+}
+
+#root {
+    min-height: 100%;
+    padding: 3vw;
+    background: rgba(255, 255, 255, 0.8);
+}
