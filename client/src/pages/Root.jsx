@@ -27,9 +27,14 @@ function Root() {
         }
     }, [authData, navigate]);
 
+    const mainStyle = {
+        padding: "20px",
+        backgroundColor: isLogged ? "#ffffff80" : "transparent",
+    };
+
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Container component="main">
+            <Container component="main" style={mainStyle}>
                 <div>
                     {isLogged && <Header />}
                     {render}
