@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LoginDemoCredentials from "./LoginDemoCredentials";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -45,6 +46,7 @@ const LoginUI = ({ handleLogin, errorText, isLoading }) => {
                         name="username"
                         autoComplete="username"
                         autoFocus
+                        value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     <TextField
@@ -56,6 +58,7 @@ const LoginUI = ({ handleLogin, errorText, isLoading }) => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button
@@ -73,6 +76,10 @@ const LoginUI = ({ handleLogin, errorText, isLoading }) => {
                 </Box>
             </Box>
             {errorText && <Toast type="error" message={errorText} />}
+            <LoginDemoCredentials
+                setUsername={setUsername}
+                setPassword={setPassword}
+            />
         </div>
     );
 };
