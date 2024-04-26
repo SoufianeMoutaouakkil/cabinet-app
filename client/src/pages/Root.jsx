@@ -29,7 +29,6 @@ function Root() {
 
     const mainStyle = {
         padding: "20px",
-        backgroundColor: isLogged ? "#ffffff80" : "transparent",
     };
 
     return (

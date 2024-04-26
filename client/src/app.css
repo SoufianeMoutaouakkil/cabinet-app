@@ -4,10 +4,11 @@ body {
     padding: 0;
     border: 1rem solid transparent;
     backdrop-filter: blur(5px);
-    height: 100vh;
+    min-height: 90%;
 }
 
 #root {
     min-height: 100%;
     padding: 3vw;
+    background-color: rgba(248, 246, 246, 0.5);
 }
